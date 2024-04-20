@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="Styles.css">
+<title>Guess The Number - Instant Games</title>
+<div id="nav">
+<button onclick="window.location.href = 'Home.html';">Home</button>
+<button onclick="window.location.href = 'Snake.html';">Snake</button>
+<button onclick="window.location.href = 'Guess The Number.html';">Number</button>
+<button onclick="window.location.href = '2048.html';">2048</button>
+<button onclick="window.location.href = 'Memory.html';">Memory</button>
+<button onclick="window.location.href = 'Tic-Tac-Toe.html';">Tic Tac Toe</button>
+</div>
+<br>
+<br>
+<script>
+  var secretNumber = Math.floor(Math.random() * 100) + 1;
+  var attempts = 0;
+
+  function guessNumber() {
+      var guess = parseInt(prompt("Guess the number between 1 and 100:"));
+      attempts++;
+      if (guess === secretNumber) {
+          alert("Gefeliciteerd! Je hebt het juiste getal geraden in " + attempts + " pogingen!");
+      } else if (guess < secretNumber) {
+          alert("Het getal is hoger. Probeer opnieuw.");
+          guessNumber();
+      } else {
+          alert("Het getal is lager. Probeer opnieuw.");
+          guessNumber();
+      }
+  }
+</script>
+</head>
+<body>
+<h2>Guess the Number</h2>
+<button onclick="guessNumber()">Start game</button>
+</body>
+<br>
+<p>Click on 'Start Game' and you will get a notification from your browser where you can play your game in! Have fun!</p>
+<br>

@@ -1,0 +1,134 @@
+<link rel="stylesheet" href="Styles.css">
+<title>Snake - Instant Games</title>
+<div id="nav">
+<button onclick="window.location.href = 'Home.html';">Home</button>
+<button onclick="window.location.href = 'Snake.html';">Snake</button>
+<button onclick="window.location.href = 'Guess The Number.html';">Number</button>
+<button onclick="window.location.href = '2048.html';">2048</button>
+<button onclick="window.location.href = 'Memory.html';">Memory</button>
+<button onclick="window.location.href = 'Tic-Tac-Toe.html';">Tic Tac Toe</button>
+</div>
+<br>
+<br>
+<br>
+<br>
+<head>
+  <style>
+      canvas {
+          border: 2px solid #f40a0a;
+          display: block;
+          margin: 0 auto;
+      }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="400" height="400"></canvas>
+  <button id="pauseButton">Pause</button>
+
+  <script>
+      var canvas = document.getElementById("gameCanvas");
+      var ctx = canvas.getContext("2d");
+      var tileSize = 20;
+      var snake = [{ x: 200, y: 200 }];
+      var food = { x: 0, y: 0 };
+      var direction = 'right';
+      var gameLoopInterval;
+
+      function getRandomPosition() {
+          return Math.floor(Math.random() * 20) * tileSize;
+      }
+
+      function drawSnake() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = "#00f";
+          snake.forEach(function (segment) {
+              ctx.fillRect(segment.x, segment.y, tileSize, tileSize);
+          });
+      }
+
+      function drawFood() {
+          ctx.fillStyle = "#f00";
+          ctx.fillRect(food.x, food.y, tileSize, tileSize);
+      }
+
+      function moveSnake() {
+          var headX = snake[0].x;
+          var headY = snake[0].y;
+
+          switch (direction) {
+              case 'up':
+                  headY -= tileSize;
+                  break;
+              case 'down':
+                  headY += tileSize;
+                  break;
+              case 'left':
+                  headX -= tileSize;
+                  break;
+              case 'right':
+                  headX += tileSize;
+                  break;
+          }
+
+          var newHead = { x: headX, y: headY };
+
+          snake.unshift(newHead);
+
+          if (headX === food.x && headY === food.y) {
+              generateFood();
+          } else {
+              snake.pop();
+          }
+      }
+
+      function generateFood() {
+          food.x = getRandomPosition();
+          food.y = getRandomPosition();
+      }
+
+      function gameLoop() {
+          moveSnake();
+          drawSnake();
+          drawFood();
+      }
+
+      generateFood();
+      gameLoopInterval = setInterval(gameLoop, 100);
+
+      document.getElementById("pauseButton").addEventListener("click", function () {
+          if (gameLoopInterval) {
+              clearInterval(gameLoopInterval);
+              gameLoopInterval = null;
+              document.getElementById("pauseButton").innerText = "Resume";
+          } else {
+              gameLoopInterval = setInterval(gameLoop, 100);
+              document.getElementById("pauseButton").innerText = "Pause";
+          }
+      });
+
+      document.addEventListener("keydown", function (e) {
+          if (!gameLoopInterval) return;
+
+          switch (e.key) {
+              case "ArrowUp":
+                  if (direction !== "down") direction = "up";
+                  break;
+              case "ArrowDown":
+                  if (direction !== "up") direction = "down";
+                  break;
+              case "ArrowLeft":
+                  if (direction !== "right") direction = "left";
+                  break;
+              case "ArrowRight":
+                  if (direction !== "left") direction = "right";
+                  break;
+          }
+
+          e.preventDefault(); // Prevent default scrolling behavior
+      });
+  </script>
+</body>
+<br>
+<br>
+<br>
+<br>

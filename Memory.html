@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="Styles.css">
+<title>Memory - Instant Games</title>
+<div id="nav">
+<button onclick="window.location.href = 'Home.html';">Home</button>
+<button onclick="window.location.href = 'Snake.html';">Snake</button>
+<button onclick="window.location.href = 'Guess The Number.html';">Number</button>
+<button onclick="window.location.href = '2048.html';">2048</button>
+<button onclick="window.location.href = 'Memory.html';">Memory</button>
+<button onclick="window.location.href = 'Tic-Tac-Toe.html';">Tic Tac Toe</button>
+</div>
+<br>
+
+
+<style>
+  .memory-card {
+      width: 100px;
+      height: 100px;
+      background-color: #ccc;
+      margin: 5px;
+      display: inline-block;
+      cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div id="memory-game"></div>
+
+<script>
+  const memoryGame = document.getElementById('memory-game');
+  const colors = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'pink', 'brown'];
+
+  let cardsChosen = [];
+  let cardsChosenId = [];
+  let cardsWon = [];
+
+  // Shuffle function to randomize the order of colors
+  function shuffle(array) {
+      let currentIndex = array.length, temporaryValue, randomIndex;
+
+      while (currentIndex !== 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+      }
+
+      return array;
+  }
+
+  // Create the memory board
+  function createBoard() {
+      shuffle(colors);
+      for (let i = 0; i < colors.length; i++) {
+          const card = document.createElement('div');
+          card.className = 'memory-card';
+          card.setAttribute('data-id', i);
+          card.addEventListener('click', flipCard);
+          memoryGame.appendChild(card);
+      }
+  }
+
+  // Check for matches
+  function checkForMatch() {
+      const cards = document.querySelectorAll('.memory-card');
+      const optionOneId = cardsChosenId[0];
+      const optionTwoId = cardsChosenId[1];
+
+      if (cardsChosen[0] === cardsChosen[1]) {
+          cards[optionOneId].style.backgroundColor = '#fff';
+          cards[optionTwoId].style.backgroundColor = '#fff';
+          cardsWon.push(cardsChosen);
+      } else {
+          cards[optionOneId].style.backgroundColor = '#ccc';
+          cards[optionTwoId].style.backgroundColor = '#ccc';
+      }
+
+      cardsChosen = [];
+      cardsChosenId = [];
+  }
+
+  // Flip the card
+  function flipCard() {
+      let cardId = this.getAttribute('data-id');
+      cardsChosen.push(colors[cardId]);
+      cardsChosenId.push(cardId);
+      this.style.backgroundColor = colors[cardId];
+
+      if (cardsChosen.length === 2) {
+          setTimeout(checkForMatch, 500);
+      }
+  }
+
+  createBoard();
+</script>
+
+</body>

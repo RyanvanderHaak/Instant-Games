@@ -1,0 +1,32 @@
+body {
+      font-family: 'Arial', 'calibri', 'sans-serif';
+      background-color: lightblue;
+  }
+
+    button {
+    background-color: rgb(29, 155, 240);
+    color: white;
+    height: 50px;
+    width: 100px;
+    border-color: orange;
+    border-radius: 50px;
+    border-style: solid;
+    cursor: pointer;
+    border-width: 0.25%;
+    margin-left: 2px;
+    font-weight: bold;
+    font-size: 12.5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: top;
+}
+#nav{
+  padding: 0.25%;
+  background-color: rgb(239, 157, 16);
+  height:max-content;
+  width:max-content;
+  margin-left: 310px;
+  border-radius: 50px;
+}

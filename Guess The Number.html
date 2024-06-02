@@ -18,12 +18,12 @@
       var guess = parseInt(prompt("Guess the number between 1 and 100:"));
       attempts++;
       if (guess === secretNumber) {
-          alert("Gefeliciteerd! Je hebt het juiste getal geraden in " + attempts + " pogingen!");
+          alert("Congratulations! You've guessed the right number in " + attempts + " attempts!");
       } else if (guess < secretNumber) {
-          alert("Het getal is hoger. Probeer opnieuw.");
+          alert("The correct answer is higher. Try again!");
           guessNumber();
       } else {
-          alert("Het getal is lager. Probeer opnieuw.");
+          alert("The correct answer is lower. Try again!");
           guessNumber();
       }
   }

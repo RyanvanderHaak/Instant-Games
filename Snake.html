@@ -16,13 +16,16 @@
   <style>
       canvas {
           border: 2px solid #f40a0a;
+          border-style: solid;
+          border-radius: 10px;
           display: block;
           margin: 0 auto;
+          background-image: url(SnakeImage.avif);
       }
   </style>
 </head>
 <body>
-  <canvas id="gameCanvas" width="400" height="400"></canvas>
+  <canvas id="gameCanvas" width="450" height="450"></canvas>
   <button id="pauseButton">Pause</button>
 
   <script>
@@ -111,15 +114,19 @@
 
           switch (e.key) {
               case "ArrowUp":
+              case "w":
                   if (direction !== "down") direction = "up";
                   break;
               case "ArrowDown":
+              case "s":
                   if (direction !== "up") direction = "down";
                   break;
               case "ArrowLeft":
+              case "a":
                   if (direction !== "right") direction = "left";
                   break;
               case "ArrowRight":
+              case "d":
                   if (direction !== "left") direction = "right";
                   break;
           }
